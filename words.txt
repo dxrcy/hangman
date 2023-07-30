@@ -1,0 +1,8 @@
+these
+are
+some
+words
+for
+the
+hangman
+game

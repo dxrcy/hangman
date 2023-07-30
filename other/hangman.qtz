@@ -1,0 +1,41 @@
+import { FS, IO, Math }
+
+print("`n=== Hangman ===")
+str #words = FS.read("words.txt"):split(/`r?`n/)
+
+loop {
+  str #word = Random.choice(words)
+  str correct = ""
+  str incorrect = ""
+
+  loop {
+    str show = ""
+    for in word as char {
+      show #= correct:has(char) ? char : "_"
+    }
+
+    if show == word {
+      print("`n========`n   WIN`n========")
+      break
+    }
+
+    print("`n#show`nChances: #{6 - incorrect.len}`nCorrect: #correct`nIncorrect: #incorrect")
+
+    str? #guess = IO.waitFor("Guess: ")
+
+    if word.has(guess) {
+      if !correct:has(guess) {
+        correct #= guess
+      }
+    } else {
+      if !incorrect:has(guess) {
+        incorrect #= guess
+      }
+    }
+
+    if incorrect:len >= 6 {
+      print("`n========`n  LOSS`n========")
+      break
+    }
+  }
+}

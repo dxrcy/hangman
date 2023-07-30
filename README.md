@@ -2,13 +2,14 @@
 
 ## Languages
 
-- Javascript
-- Powershell
+- Rust
+- Lua
 - Python
+- Javascript & Typescript
+- Powershell
 - Ruby
-- Typescript
 
-## Requirements
+## Program Requirements
 
 - Strings, numbers, arrays
 - File system
@@ -21,10 +22,7 @@
 
 ## Languages to add
 
+- Bash
 - AHK
-- Rust
 - C (++/#)
 
-## Todo
-
-- Add index file

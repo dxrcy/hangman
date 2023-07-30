@@ -3,6 +3,8 @@
 Simple CLI hangman examples in a few programming languages.
 Hangman is a decent program to explore basic programming concepts in a language.
 
+Some examples may not work properly.
+
 ## Languages
 
 - Rust
@@ -11,7 +13,7 @@ Hangman is a decent program to explore basic programming concepts in a language.
 - Javascript & Typescript
 - Powershell
 - Ruby
-- AHK (Maybe does not work...)
+- AHK
 
 ## Program Requirements
 

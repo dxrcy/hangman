@@ -28,6 +28,6 @@ Some examples may not work properly.
 
 ## Languages to add
 
-- Bash
+- **Posix shell**
 - C (++)
 

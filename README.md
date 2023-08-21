@@ -14,6 +14,7 @@ Some examples may not work properly.
 - Powershell
 - Ruby
 - AHK
+- Bash (Posix-compliant shell)
 
 ## Program Requirements
 
@@ -28,6 +29,5 @@ Some examples may not work properly.
 
 ## Languages to add
 
-- **Posix shell**
 - C (++)
 

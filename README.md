@@ -15,6 +15,7 @@ Some examples may not work properly.
 - Ruby
 - AHK
 - Bash (Posix-compliant shell)
+- Java
 
 ## Program Requirements
 
@@ -26,8 +27,4 @@ Some examples may not work properly.
 - String, array length and indexing
 - Loops, if else statements
 - Check if character in string
-
-## Languages to add
-
-- C (++)
 

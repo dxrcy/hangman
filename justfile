@@ -26,7 +26,7 @@ rb:
 	ruby src/ruby/hangman.rb
 
 # Rust
-rust:
+rs:
 	rustc src/rust/hangman.rs -o dist/hangman && dist/hangman
 
 # Shell (bash)
@@ -35,7 +35,7 @@ sh:
 
 # Typescript
 ts:
-	ts-node src/typescript/hangman.rs
+	ts-node src/typescript/hangman.ts
 
 # Zig
 zig:

@@ -38,7 +38,7 @@ var words: string[] = fs.readFileSync("words.txt").toString().split("\r\n");
 
             var guess: string = await new Promise((resolve) => {
                 var rl = readline.createInterface(process.stdin, process.stdout);
-                rl.question("Guess: ", (res) => {
+                rl.question("Guess: ", (res: string) => {
                     resolve(res);
                     rl.close();
                 });

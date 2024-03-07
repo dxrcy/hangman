@@ -8,6 +8,7 @@ Simple CLI hangman examples in a few programming languages.
 - Java
 - Javascript
 - Lua
+- Powershell
 - Python
 - Ruby
 - Rust

@@ -17,6 +17,10 @@ js:
 lua:
 	lua src/lua/hangman.lua
 
+# Powershell
+pwsh:
+	pwsh src/powershell/hangman.ps1
+
 # Python
 py:
 	python src/python/hangman.py

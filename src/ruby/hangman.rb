@@ -1,4 +1,4 @@
-puts "\n=== Hangman ==="
+puts "=== Hangman ==="
 words = File.new("words.txt", "r").read.split("\n")
 
 loop do

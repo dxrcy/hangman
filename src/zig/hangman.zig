@@ -6,7 +6,7 @@ const ArrayList = std.ArrayList;
 const stdin = std.io.getStdIn().reader();
 
 pub fn main() !void {
-    print("\n=== Hangman ===\n", .{});
+    print("=== Hangman ===\n", .{});
 
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     defer _ = gpa.deinit();

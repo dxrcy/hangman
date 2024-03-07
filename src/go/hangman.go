@@ -1,71 +1,70 @@
 package main
 
 import (
-    "fmt"
-    "os"
-    "strings"
-    "math/rand"
+	"fmt"
+	"math/rand"
+	"os"
+	"strings"
 )
 
 func main() {
-    fmt.Println("\n=== Hangman ===")
+	fmt.Println("=== Hangman ===")
 
-    file, err := os.ReadFile("words.txt")
-    if err != nil {
-        panic("failed to read file")
-    }
-    words := strings.Split(string(file), "\n")
+	file, err := os.ReadFile("words.txt")
+	if err != nil {
+		panic("failed to read file")
+	}
+	words := strings.Split(string(file), "\n")
 
-    for {
-        word := strings.TrimSpace(words[rand.Intn(len(words))])
+	for {
+		word := strings.TrimSpace(words[rand.Intn(len(words))])
 
-        correct, incorrect:= "", ""
+		correct, incorrect := "", ""
 
-        for {
-            show := ""
-            for _, letter := range word {
-                if strings.Contains(correct, string(letter)) {
-                    show += string(letter)
-                } else {
-                    show += "_"
-                }
-            }
+		for {
+			show := ""
+			for _, letter := range word {
+				if strings.Contains(correct, string(letter)) {
+					show += string(letter)
+				} else {
+					show += "_"
+				}
+			}
 
-            if show == word {
-                print ("\n========\n   WIN\n========")
-                break
-            }
+			if show == word {
+				print("\n========\n   WIN\n========")
+				break
+			}
 
-            fmt.Printf(
-                "\n%s\nChances: %d\nCorrect: %s\nIncorrect: %s\n",
-                show,
-                6 - len(incorrect),
-                correct,
-                incorrect,
-            )
+			fmt.Printf(
+				"\n%s\nChances: %d\nCorrect: %s\nIncorrect: %s\n",
+				show,
+				6-len(incorrect),
+				correct,
+				incorrect,
+			)
 
-            fmt.Print("Guess: ")
-            var guess string
-            fmt.Scanln(&guess)
+			fmt.Print("Guess: ")
+			var guess string
+			fmt.Scanln(&guess)
 
-            if strings.Contains(word, guess) {
-                if !strings.Contains(correct, guess) {
-                    correct += guess
-                }
-            } else {
-                if !strings.Contains(correct, guess) {
-                    incorrect += guess
-                }
-            }
+			if strings.Contains(word, guess) {
+				if !strings.Contains(correct, guess) {
+					correct += guess
+				}
+			} else {
+				if !strings.Contains(correct, guess) {
+					incorrect += guess
+				}
+			}
 
-            if len(incorrect) >= 6 {
-                fmt.Printf(
-                    "\n========\n  LOSS\n  The word was '%s'\n========\n",
-                    word,
-                )
-                break
-            }
-        }
-    }
+			if len(incorrect) >= 6 {
+				fmt.Printf(
+					"\n========\n  LOSS\n  The word was '%s'\n========\n",
+					word,
+				)
+				break
+			}
+		}
+	}
 }
-

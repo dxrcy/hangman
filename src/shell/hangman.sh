@@ -1,6 +1,6 @@
 #!/bin/sh
 
-printf '\n=== Hangman ===\n'
+printf '=== Hangman ===\n'
 
 while true; do
     word=$(shuf -n 1 'words.txt' | tr -d '\r' | tr -d '\n')

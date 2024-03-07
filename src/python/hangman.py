@@ -1,6 +1,6 @@
 import random
 
-print ("\n=== Hangman ===")
+print ("=== Hangman ===")
 words = open("words.txt", "r").read().split("\n")
 
 while True:

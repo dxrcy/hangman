@@ -3,7 +3,7 @@ use std::fs;
 use std::io::{stdin, stdout, Write};
 
 fn main() {
-    println!("\n=== Hangman ===");
+    println!("=== Hangman ===");
 
     let file = fs::read_to_string("words.txt").expect("Should have been able to read the file");
     let words: Vec<&str> = file.split("\r\n").collect();

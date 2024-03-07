@@ -1,4 +1,4 @@
-print("\n=== Hangman ===")
+print("=== Hangman ===")
 
 -- Read lines of file into table
 function file_lines(filename)
@@ -36,7 +36,7 @@ while true do
 
         -- Word is guessed - win
         if show == word then
-            print ("\n========\n   WIN\n========")
+            print("\n========\n   WIN\n========")
             break
         end
 
@@ -75,6 +75,4 @@ while true do
             break
         end
     end
-
 end
-

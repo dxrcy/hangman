@@ -44,17 +44,17 @@ fn main() -> Result<(), &'static str> {
             }
 
             if is_win {
-                println!();
                 println!("--------");
-                println!("You win!");
+                println!("You win! :)");
+                println!("The word was: '{}'", word);
                 println!("--------");
                 read_char();
                 break;
             }
             if incorrect.len() >= 6 {
-                println!();
                 println!("---------");
-                println!("You lose!");
+                println!("You lose! :(");
+                println!("The word was: '{}'", word);
                 println!("---------");
                 read_char();
                 break;

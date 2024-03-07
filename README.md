@@ -1,30 +1,28 @@
 # Hangman Examples
 
 Simple CLI hangman examples in a few programming languages.
-Hangman is a decent program to explore basic programming concepts in a language.
-
-Some examples may not work properly.
 
 ## Languages
 
-- Rust
+- Go
+- Java
+- Javascript
 - Lua
 - Python
-- Javascript & Typescript
-- Powershell
+- Rust
 - Ruby
-- AHK
-- Bash (Posix-compliant shell)
-- Java
+- Shell (bash)
+- Typescript
+- Zig
 
-## Program Requirements
+## Concepts implemented
 
-- Strings, numbers, arrays
-- File system
+- Basic types: strings, numbers, arrays
+- File system reading
 - Input / Output
-- Special characters in strings (linebreak)
-- Random number
-- String, array length and indexing
-- Loops, if else statements
-- Check if character in string
+- Splitting strings at linebreaks
+- Random number generation
+- String and array indexing
+- Loops and conditional statements
+- Basic string manipulation
 

@@ -1,85 +1,110 @@
-use std::fs;
-use std::io::{stdin, stdout, Write};
+use std::{
+    collections::HashSet,
+    env, fs,
+    io::{self, Write},
+    time::{SystemTime, UNIX_EPOCH},
+};
 
-fn main() {
-    println!("=== Hangman ===");
+fn main() -> Result<(), &'static str> {
+    println!("=== HANGMAN ===");
 
-    let file =
-        fs::read_to_string("words.txt").expect("Should have been able to read the file");
-    let words: Vec<&str> = file.split("\r\n").collect();
+    let mut args = env::args().skip(1);
+    let Some(filename) = args.next() else {
+        return Err("Please provide a file path.");
+    };
+
+    let Ok(file) = fs::read_to_string(filename) else {
+        return Err("Failed to read file.");
+    };
+    let words: Vec<_> = file.lines().collect();
+
+    println!("\n\n\n\n\n");
 
     loop {
         let index = random_int(words.len());
-        let word: &str = words[index];
-        let mut correct = String::from("");
-        let mut incorrect = String::from("");
+        let word = words[index];
+
+        let mut correct = HashSet::<char>::new();
+        let mut incorrect = HashSet::<char>::new();
 
         loop {
-            let mut show = String::with_capacity(word.len());
-            for x in word.chars() {
-                if correct.contains(x) {
-                    show.push(x);
+            for _ in 0..5 {
+                print!("\x1b[A\x1b[K");
+            }
+
+            let mut visible = String::new();
+            let mut is_win = true;
+            for ch in word.chars() {
+                if correct.contains(&ch) {
+                    visible.push(ch);
                 } else {
-                    show.push('_');
+                    visible.push('_');
+                    is_win = false;
                 }
             }
 
-            if show == word {
-                println!("\n========\n   WIN\n========");
+            if is_win {
+                println!();
+                println!("--------");
+                println!("You win!");
+                println!("--------");
+                read_char();
+                break;
+            }
+            if incorrect.len() >= 6 {
+                println!();
+                println!("---------");
+                println!("You lose!");
+                println!("---------");
+                read_char();
                 break;
             }
 
-            println!(
-                "\n{}\nChances: {}\nCorrect: {}\nIncorrect: {}",
-                show,
-                6 - incorrect.len(),
-                correct,
-                incorrect
-            );
+            println!("{}", visible);
+            println!("Chances: {}", 6 - incorrect.len());
+            print!("Correct: ");
+            print_set(&correct);
+            print!("Incorrect: ");
+            print_set(&incorrect);
+            print!("Guess: ");
 
-            let guess = input(&"Guess: ").chars().next().unwrap();
+            let Some(guess) = read_char() else {
+                continue;
+            };
 
             if word.contains(guess) {
-                if !correct.contains(guess) {
-                    correct.push(guess);
-                }
+                correct.insert(guess);
             } else {
-                if !incorrect.contains(guess) {
-                    incorrect.push(guess);
-                }
-            }
-
-            if incorrect.len() >= 6 {
-                println!("\n========\n  LOSS\n  The word was '{}'\n========", word);
-                break;
+                incorrect.insert(guess);
             }
         }
     }
 }
 
 fn random_int(max: usize) -> usize {
-    use std::time::{SystemTime, UNIX_EPOCH};
     let now = SystemTime::now();
     let duration = now.duration_since(UNIX_EPOCH).unwrap();
     let nanos = duration.subsec_nanos() as usize;
     nanos % max
 }
 
-fn input(prompt: &str) -> String {
-    let mut s = String::new();
-    print!("{}", prompt);
-
-    let _ = stdout().flush();
-    stdin()
-        .read_line(&mut s)
-        .expect("Did not enter a correct string");
-
-    if let Some('\n') = s.chars().next_back() {
-        s.pop();
+fn print_set(set: &HashSet<char>) {
+    for (i, ch) in set.iter().enumerate() {
+        if i > 0 {
+            print!(", ");
+        }
+        print!("{}", ch);
     }
-    if let Some('\r') = s.chars().next_back() {
-        s.pop();
-    }
-
-    s
+    println!();
 }
+
+fn read_char() -> Option<char> {
+    let mut string = String::new();
+    let _ = io::stdout().flush();
+    io::stdin().read_line(&mut string).unwrap();
+    string
+        .chars()
+        .next()
+        .filter(|ch| *ch != '\r' && *ch != '\n')
+}
+

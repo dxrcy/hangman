@@ -31,7 +31,7 @@ rb:
 
 # Rust
 rs:
-	rustc src/rust/hangman.rs -o dist/hangman && dist/hangman
+	rustc src/rust/hangman.rs -o dist/hangman && dist/hangman words.txt
 
 # Shell (bash)
 sh:

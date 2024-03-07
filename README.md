@@ -9,8 +9,8 @@ Simple CLI hangman examples in a few programming languages.
 - Javascript
 - Lua
 - Python
-- Rust
 - Ruby
+- Rust
 - Shell (bash)
 - Typescript
 - Zig
@@ -25,4 +25,8 @@ Simple CLI hangman examples in a few programming languages.
 - String and array indexing
 - Loops and conditional statements
 - Basic string manipulation
+
+## TODO
+
+- Specify file location with argument
 

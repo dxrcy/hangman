@@ -21,13 +21,13 @@ lua:
 py:
 	python src/python/hangman.py
 
-# Rust
-rs:
-	echo coming soon
-
 # Ruby
 rb:
 	ruby src/ruby/hangman.rb
+
+# Rust
+rust:
+	rustc src/rust/hangman.rs -o dist/hangman && dist/hangman
 
 # Shell (bash)
 sh:

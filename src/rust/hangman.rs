@@ -1,15 +1,16 @@
-use rand::seq::SliceRandom;
 use std::fs;
 use std::io::{stdin, stdout, Write};
 
 fn main() {
     println!("=== Hangman ===");
 
-    let file = fs::read_to_string("words.txt").expect("Should have been able to read the file");
+    let file =
+        fs::read_to_string("words.txt").expect("Should have been able to read the file");
     let words: Vec<&str> = file.split("\r\n").collect();
 
     loop {
-        let word: &str = words.choose(&mut rand::thread_rng()).unwrap();
+        let index = random_int(words.len());
+        let word: &str = words[index];
         let mut correct = String::from("");
         let mut incorrect = String::from("");
 
@@ -54,6 +55,14 @@ fn main() {
             }
         }
     }
+}
+
+fn random_int(max: usize) -> usize {
+    use std::time::{SystemTime, UNIX_EPOCH};
+    let now = SystemTime::now();
+    let duration = now.duration_since(UNIX_EPOCH).unwrap();
+    let nanos = duration.subsec_nanos() as usize;
+    nanos % max
 }
 
 fn input(prompt: &str) -> String {

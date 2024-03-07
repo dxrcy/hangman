@@ -31,7 +31,7 @@ rb:
 
 # Shell (bash)
 sh:
-	sh src/sh/hangman.sh
+	sh src/shell/hangman.sh
 
 # Typescript
 ts:

@@ -31,7 +31,7 @@ rb:
 
 # Rust
 rs:
-	rustc src/rust/hangman.rs -o dist/hangman && dist/hangman words.txt
+	rustc src/rust/hangman.rs -o dist/hangman && dist/hangman words/lf.txt
 
 # Shell (bash)
 sh:
@@ -43,5 +43,5 @@ ts:
 
 # Zig
 zig:
-	zig run src/zig/hangman.zig -- words.txt
+	zig run src/zig/hangman.zig -- words/lf.txt
 

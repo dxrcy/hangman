@@ -11,10 +11,10 @@ Simple CLI hangman examples in a few programming languages.
 - Powershell
 - Python
 - Ruby
-- Rust
+- ⭐ Rust
 - Shell (bash)
 - Typescript
-- Zig
+- ⭐ Zig
 
 ## Concepts implemented
 

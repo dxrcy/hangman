@@ -43,5 +43,5 @@ ts:
 
 # Zig
 zig:
-	zig run src/zig/hangman.zig
+	zig run src/zig/hangman.zig -- words.txt
 

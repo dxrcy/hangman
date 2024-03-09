@@ -32,7 +32,7 @@ fn main() -> Result<(), &'static str> {
                 print!("\x1b[A\x1b[K");
             }
 
-            let mut visible = String::new();
+            let mut visible = String::with_capacity(word.len());
             let mut is_win = true;
             for ch in word.chars() {
                 if correct.contains(&ch) {
@@ -44,10 +44,10 @@ fn main() -> Result<(), &'static str> {
             }
 
             if is_win {
-                println!("--------");
+                println!("---------");
                 println!("You win! :)");
                 println!("The word was: '{}'", word);
-                println!("--------");
+                println!("---------");
                 read_char();
                 break;
             }

@@ -12,7 +12,7 @@ Simple CLI hangman examples in a few programming languages.
 - 🟦 [Typescript](./src/hangman.ts)
 - 🦎 [Zig](./src/hangman.zig)
 
-- *([Pseudocode](./hangman.pseudo))*
+- *([Pseudocode](./src/hangman.pseudo))*
 
 ### (Need updating)
 

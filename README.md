@@ -2,11 +2,11 @@
 
 Simple CLI hangman examples in a few programming languages.
 
-[Pseudocode Example](./hangman.pseudo)
-
 ## Languages
 
-- Go
+- [Pseudocode](./hangman.pseudo)
+
+- [Go](./src/go/hangman.go)
 - Java
 - Javascript
 - Lua

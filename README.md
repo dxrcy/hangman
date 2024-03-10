@@ -15,7 +15,7 @@ Simple CLI hangman examples in a few programming languages.
 - Ruby
 - ⭐ Rust
 - Shell (bash)
-- Typescript
+- ⭐ Typescript
 - ⭐ Zig
 
 ## Concepts implemented

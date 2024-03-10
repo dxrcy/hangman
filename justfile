@@ -41,7 +41,7 @@ sh:
 
 # Typescript
 ts:
-	ts-node src/typescript/hangman.ts
+	ts-node src/typescript/hangman.ts {{words}}
 
 # Zig
 zig:

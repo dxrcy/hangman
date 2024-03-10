@@ -13,7 +13,7 @@ java:
 
 # Javascript
 js:
-	node src/javascript/hangman.js
+	node src/javascript/hangman.js {{words}}
 
 # Lua
 lua:

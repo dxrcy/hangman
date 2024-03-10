@@ -8,7 +8,7 @@ Simple CLI hangman examples in a few programming languages.
 
 - Go
 - ⭐ Java
-- Javascript
+- ⭐ Javascript
 - Lua
 - Powershell
 - Python

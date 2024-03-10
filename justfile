@@ -5,45 +5,45 @@ words := "words/lf.txt"
 
 # Go
 go:
-	go run src/go/hangman.go {{words}}
+	go run src/hangman.go {{words}}
 
 # Java
 java:
-	java src/java/hangman.java {{words}} 
+	java src/hangman.java {{words}} 
 
 # Javascript
 js:
-	node src/javascript/hangman.js {{words}}
+	node src/hangman.js {{words}}
 
 # Lua
 lua:
-	lua src/lua/hangman.lua {{words}}
+	lua src/hangman.lua {{words}}
 
 # Powershell
 pwsh:
-	pwsh src/powershell/hangman.ps1
+	pwsh src/hangman.ps1
 
 # Python
 py:
-	python src/python/hangman.py
+	python src/hangman.py
 
 # Ruby
 rb:
-	ruby src/ruby/hangman.rb
+	ruby src/hangman.rb
 
 # Rust
 rs:
-	rustc src/rust/hangman.rs -o dist/hangman && dist/hangman {{words}}
+	rustc src/hangman.rs -o dist/hangman && dist/hangman {{words}}
 
 # Shell (bash)
 sh:
-	sh src/shell/hangman.sh
+	sh src/hangman.sh
 
 # Typescript
 ts:
-	ts-node src/typescript/hangman.ts {{words}}
+	ts-node src/hangman.ts {{words}}
 
 # Zig
 zig:
-	zig run src/zig/hangman.zig -- {{words}} 
+	zig run src/hangman.zig -- {{words}} 
 

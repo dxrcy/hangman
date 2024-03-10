@@ -23,8 +23,8 @@ local function main()
         local incorrect = ""
 
         while true do
-            for i = 1, 5 do
-                io.write("\x1b[A\x1b[K");
+            for _ = 1, 5 do
+                io.write("\033[A\033[K");
             end
 
             local visible = ""

@@ -29,7 +29,7 @@ func main() {
 
 	scanner := bufio.NewScanner(os.Stdin)
 
-	fmt.Println("\n\n\n\n\n")
+	fmt.Print("\n\n\n\n\n\n")
 
 	for {
 		index := rand.Intn(len(words))
@@ -40,7 +40,7 @@ func main() {
 
 		for {
 			for i := 0; i < 5; i++ {
-				fmt.Print("\x1b[A\x1b[K")
+				fmt.Print("\033[A\033[K")
 			}
 
 			visible := ""

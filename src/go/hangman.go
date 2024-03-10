@@ -1,70 +1,108 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"log"
 	"math/rand"
 	"os"
 	"strings"
 )
 
 func main() {
-	fmt.Println("=== Hangman ===")
+	fmt.Println("=== HANGMAN ===")
 
-	file, err := os.ReadFile("words.txt")
+	stderr := log.New(os.Stderr, "", 0)
+
+	if len(os.Args) < 2 {
+		stderr.Println("Please provide a file path.")
+		os.Exit(1)
+	}
+	filename := os.Args[1]
+
+	file, err := os.ReadFile(filename)
 	if err != nil {
-		panic("failed to read file")
+		stderr.Println("Failed to read file.")
+		os.Exit(1)
 	}
 	words := strings.Split(string(file), "\n")
 
-	for {
-		word := strings.TrimSpace(words[rand.Intn(len(words))])
+	scanner := bufio.NewScanner(os.Stdin)
 
-		correct, incorrect := "", ""
+	fmt.Println("\n\n\n\n\n")
+
+	for {
+		index := rand.Intn(len(words))
+		word := strings.TrimSpace(words[index])
+
+		correct := make(map[rune]bool)
+		incorrect := make(map[rune]bool)
 
 		for {
-			show := ""
-			for _, letter := range word {
-				if strings.Contains(correct, string(letter)) {
-					show += string(letter)
+			for i := 0; i < 5; i++ {
+				fmt.Print("\x1b[A\x1b[K")
+			}
+
+			visible := ""
+			is_win := true
+			for _, ch := range word {
+				if correct[ch] {
+					visible += string(ch)
 				} else {
-					show += "_"
+					visible += "_"
+					is_win = false
 				}
 			}
 
-			if show == word {
-				print("\n========\n   WIN\n========")
+			if is_win {
+				fmt.Println("---------")
+				fmt.Println("You win! :)")
+				fmt.Printf("The word was: '%s'\n", word)
+				fmt.Println("---------")
+				scanner.Scan()
 				break
 			}
-
-			fmt.Printf(
-				"\n%s\nChances: %d\nCorrect: %s\nIncorrect: %s\n",
-				show,
-				6-len(incorrect),
-				correct,
-				incorrect,
-			)
-
-			fmt.Print("Guess: ")
-			var guess string
-			fmt.Scanln(&guess)
-
-			if strings.Contains(word, guess) {
-				if !strings.Contains(correct, guess) {
-					correct += guess
-				}
-			} else {
-				if !strings.Contains(correct, guess) {
-					incorrect += guess
-				}
-			}
-
 			if len(incorrect) >= 6 {
-				fmt.Printf(
-					"\n========\n  LOSS\n  The word was '%s'\n========\n",
-					word,
-				)
+				fmt.Println("---------")
+				fmt.Println("You lose! :(")
+				fmt.Printf("The word was: '%s'\n", word)
+				fmt.Println("---------")
+				scanner.Scan()
 				break
+			}
+
+			fmt.Println(visible)
+			fmt.Printf("Chances: %d\n", 6-len(incorrect))
+			fmt.Print("Correct: ")
+			printSet(correct)
+			fmt.Print("Incorrect: ")
+			printSet(incorrect)
+			fmt.Print("Guess: ")
+
+			var line string
+			fmt.Scanln(&line)
+			if len(line) < 1 {
+				continue
+			}
+			guess := []rune(line)[0]
+
+			if strings.ContainsRune(word, guess) {
+				correct[guess] = true
+			} else {
+				incorrect[guess] = true
 			}
 		}
 	}
+}
+
+func printSet(set map[rune]bool) {
+	i := 0
+	for ch, _ := range set {
+		if i > 0 {
+			fmt.Print(", ")
+		}
+		fmt.Printf("%c", ch)
+		i++
+	}
+	fmt.Println()
 }

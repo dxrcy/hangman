@@ -5,7 +5,7 @@ words := "words/lf.txt"
 
 # Go
 go:
-	go run src/go/hangman.go
+	go run src/go/hangman.go {{words}}
 
 # Java
 java:

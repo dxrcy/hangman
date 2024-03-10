@@ -9,7 +9,7 @@ go:
 
 # Java
 java:
-	java src/java/hangman.java -- {{words}} 
+	java src/java/hangman.java {{words}} 
 
 # Javascript
 js:
@@ -17,7 +17,7 @@ js:
 
 # Lua
 lua:
-	lua src/lua/hangman.lua
+	lua src/lua/hangman.lua {{words}}
 
 # Powershell
 pwsh:

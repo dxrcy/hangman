@@ -1,13 +1,96 @@
-print("=== Hangman ===")
+print("=== HANGMAN ===")
 
--- Read lines of file into table
-function file_lines(filename)
+local function main()
+    if #arg < 1 then
+        print("Please provide a file path.")
+        os.exit(1)
+    end
+    local filename = arg[1]
+
+    local words = ReadFileLines(filename)
+    if words == nil then
+        print("Failed to read file.")
+        os.exit(2)
+    end
+
+    print("\n\n\n\n\n")
+
+    while true do
+        local index = math.random(1, #words)
+        local word = words[index]
+
+        local correct = ""
+        local incorrect = ""
+
+        while true do
+            for i = 1, 5 do
+                io.write("\x1b[A\x1b[K");
+            end
+
+            local visible = ""
+            local is_win = true
+            for i = 1, #word do
+                local ch = word:sub(i, i)
+                if string.find(correct, ch) then
+                    visible = visible .. ch
+                else
+                    visible = visible .. "_"
+                    is_win = false
+                end
+            end
+
+            if is_win then
+                print("---------")
+                print("You win! :)")
+                print("The word was: '" .. word .. "'")
+                print("---------")
+                io.read()
+                break
+            end
+            if #incorrect >= 6 then
+                print("---------")
+                print("You lose! :(")
+                print("The word was: '" .. word .. "'")
+                print("---------")
+                io.read()
+                break
+            end
+
+            print(visible)
+            print("Chances: " .. (6 - #incorrect))
+            print("Correct: " .. StringSeparate(correct))
+            print("Incorrect: " .. StringSeparate(incorrect))
+            io.write("Guess: ")
+
+            local line = io.read()
+            if #line >= 1 then
+                local guess = line:sub(1, 1)
+
+                if string.find(word, guess) then
+                    if not string.find(correct, guess) then
+                        correct = correct .. guess
+                    end
+                else
+                    if not string.find(incorrect, guess) then
+                        incorrect = incorrect .. guess
+                    end
+                end
+            end
+        end
+    end
+end
+
+function ReadFileLines(filename)
     local file = io.open(filename, "r")
+    if file == nil then
+        return
+    end
 
     local lines = {}
     for line in file:lines() do
-        -- Remove trailing newline
-        line = line:gsub("[\r\n]", "")
+        if line:sub(-1) == "\r" then
+            line = line:sub(1, -2)
+        end
         table.insert(lines, line)
     end
     file:close()
@@ -15,64 +98,15 @@ function file_lines(filename)
     return lines
 end
 
--- Read words from fileb
-local words = file_lines("words.txt")
-
-while true do
-    -- Get random word
-    local word = words[math.random(1, #words)]
-
-    local correct = ""
-    local incorrect = ""
-
-    while true do
-        -- Show current guessed letters status
-        local show = ""
-        for letter in word:gmatch(".") do
-            -- Show letter if in 'correct'
-            show = show ..
-                (string.find(correct, letter) and letter or "_")
+function StringSeparate(input)
+    local output = ""
+    for i = 1, #input do
+        if i > 1 then
+            output = output .. ", "
         end
-
-        -- Word is guessed - win
-        if show == word then
-            print("\n========\n   WIN\n========")
-            break
-        end
-
-        -- Show game state
-        print(string.format(
-            "\n%s\nChances: %d\nCorrect: %s\nIncorrect: %s",
-            show,
-            6 - #incorrect,
-            correct,
-            incorrect
-        ))
-
-        -- Read guess from stdin
-        io.write("Guess: ")
-        local guess = io.read()
-
-        -- Guess is correct
-        if string.find(word, guess) then
-            -- Add to 'correct' if not already guessed
-            if not string.find(correct, guess) then
-                correct = correct .. guess
-            end
-        else
-            -- Add to 'incorrect' if not already guessed
-            if not string.find(incorrect, guess) then
-                incorrect = incorrect .. guess
-            end
-        end
-
-        -- No more chances - loss
-        if #incorrect >= 6 then
-            print(string.format(
-                "\n========\n  LOSS\n  The word was '%s'\n========",
-                word
-            ))
-            break
-        end
+        output = output .. input:sub(i, i)
     end
+    return output
 end
+
+main()

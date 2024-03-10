@@ -16,12 +16,12 @@ public class Hangman {
     public static void main(String[] args) {
         System.out.println("=== HANGMAN ===");
 
-        if (args.length < 2) {
+        if (args.length < 1) {
             System.err.println("Please provide a file path.");
             System.exit(1);
             return;
         }
-        String filename = args[1];
+        String filename = args[0];
 
         List<String> words;
         try {

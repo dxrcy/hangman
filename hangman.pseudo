@@ -1,0 +1,71 @@
+print "=== HANGMAN ==="
+
+set `filename` to first argument 
+
+if no argument given:
+    print "Please provide a file path." to stderr
+    exit with code 1
+
+read file with filename given
+
+if file not found, or file read fails:
+    print "Failed to read file." to stderr
+    exit with code 2
+
+create array `words`, with lines of file as string items
+
+infinite loop:
+
+    set `word` to a random item of array `words`
+
+    create empty sets `correct` and `incorrect`
+
+    game loop:
+
+        clear last lines printed (returning cursor below header)
+        (this can be done by printing "\033[A\033[K" 5 times)
+
+        create empty string `visible` 
+        set win flag to default true
+        for each character in `word`:
+            if character is an item of `correct`:
+                append character to `visible`
+            otherwise:
+                append underscore to visible
+                set win flag to false
+
+        if win flag is true:
+            print of dashes
+            print "You win! :)"
+            print "The word was '{word}'"
+            print of dashes
+            wait for user to press enter
+            break from game loop, starting new game
+
+        if there are 6 or more items in the set `incorrect`:
+            print of dashes
+            print "You lose! :("
+            print "The word was '{word}'"
+            print of dashes
+            wait for user to press enter
+            break from game loop, starting new game
+
+        print `visible`
+        print "Chances: " + 6 - length of `incorrect`
+        print "Correct: " + items of `correct`, separated by commas
+        print "Incorrect: " + items of `incorrect`, separated by commas
+        print "Guess: " with no newline
+            
+        read the first character from the user input
+        if no character was given (other than a newline):
+            continue the game loop, skipping the instructions below
+
+        if user guess is a character of `word`:
+            add guess to the set `correct`
+        otherwise:
+            add guess to the set `incorrect`
+
+    end of game loop
+
+end of infite loop
+

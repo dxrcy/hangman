@@ -2,6 +2,8 @@
 
 Simple CLI hangman examples in a few programming languages.
 
+[Pseudocode Example](./hangman.pseudo)
+
 ## Languages
 
 - Go

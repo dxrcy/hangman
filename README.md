@@ -9,6 +9,7 @@ Simple CLI hangman examples in a few programming languages.
 - 🟨 [Javascript](./src/hangman.js)
 - 🌕 [Lua](./src/hangman.lua)
 - 🦀 [Rust](./src/hangman.rs)
+- 🖥️ [Shell (bash)](./src/hangman.sh)
 - 🟦 [Typescript](./src/hangman.ts)
 - 🦎 [Zig](./src/hangman.zig)
 
@@ -19,7 +20,6 @@ Simple CLI hangman examples in a few programming languages.
 - Powershell
 - Python
 - Ruby
-- Shell (bash)
 
 ## Concepts implemented
 

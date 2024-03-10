@@ -1,63 +1,110 @@
 #!/bin/sh
 
-printf '=== Hangman ===\n'
+main() {
+    echo "=== HANGMAN ==="
 
-while true; do
-    word=$(shuf -n 1 'words.txt' | tr -d '\r' | tr -d '\n')
-    correct=''
-    incorrect=''
+    filename="$1"
+    if [ -z "$filename" ]; then
+        echo "Please provide a file path." >&2
+        exit 1
+    fi
+
+    printf '\n\n\n\n\n\n'
 
     while true; do
-        show=''
+        word="$(shuf -n1 "$filename" | tr -d '\r' | tr -d '\n')"
+        correct=''
+        incorrect=''
 
-        length=${#word}
-        i=0
-        while [ "$i" -lt "$length" ]; do
-            i=$((i + 1))
-            letter=$(echo "$word" | cut -c "$i")
+        while true; do
+            i=0
+            while [ "$i" -lt 5 ]; do
+                i=$((i + 1))
+                printf '\033[A\033[K'
+            done
+            
+            visible=''
+            is_win=1
+            i=0
+            while [ "$i" -lt "${#word}" ]; do
+                i=$((i + 1))
+                ch=$(echo "$word" | cut -c "$i")
 
-            case "$correct" in
-                *"$letter"*)
-                    show="$show$letter" ;;
+                case "$correct" in
+                    *"$ch"*)
+                        visible="$visible$ch"
+                        ;;
+                    *)
+                        visible="${visible}_"
+                        is_win=0
+                        ;;
+                esac
+            done
+
+            if [ "$is_win" = 1 ]; then
+                echo "---------"
+                echo "You win! :)"
+                printf "The word was: '%s'\n" "$word"
+                echo "---------"
+                read -r
+                break
+            fi
+            if [ "${#incorrect}" -ge 6 ]; then
+                echo "---------"
+                echo "You lose! :("
+                printf "The word was: '%s'\n" "$word"
+                echo "---------"
+                read -r
+                break
+            fi
+            
+            echo "$visible"
+            echo 'Chances:' "$((6 - ${#incorrect}))"
+            printf 'Correct: '
+            string_separate "$correct"
+            printf 'Incorrect: '
+            string_separate "$incorrect"
+            printf 'Guess: '
+
+            read -r line
+            if [ "${#line}" -lt 1 ]; then
+                continue
+            fi
+            guess=$(echo "$line" | cut -c 1)
+
+            case "$word" in
+                *"$guess"*)
+                    case "$correct" in
+                        *"$guess"*) ;;
+                        *)
+                            correct="$correct$guess" ;;
+                    esac
+                    ;;
                 *)
-                    show="${show}_" ;;
+                    case "$incorrect" in
+                        *"$guess"*) ;;
+                        *)
+                            incorrect="$incorrect$guess" ;;
+                    esac
+                    ;;
             esac
         done
-
-        if [ "$show" = "$word" ]; then
-            printf '\n========\n   WIN\n========\n'
-            break
-        fi
-
-        length="${#incorrect}"
-        chances=$((6 - length))
-    
-        printf '\n%s\nChances: %s\nCorrect: %s\nIncorrect: %s\n' "$show" "$chances" "$correct" "$incorrect"
-
-        printf 'Guess: '
-        read -r guess
-
-        case "$word" in
-            *"$guess"*)
-                case "$correct" in
-                    *"$guess"*) ;;
-                    *)
-                        correct="$correct$guess" ;;
-                esac
-                ;;
-            *)
-                case "$incorrect" in
-                    *"$guess"*) ;;
-                    *)
-                        incorrect="$incorrect$guess" ;;
-                esac
-                ;;
-        esac
-
-        if [ "${#incorrect}" -ge 6 ]; then
-            printf "\n========\n  LOSS\n  The word was '%s'\n========\n" "$word"
-            break
-        fi
     done
-done
+}
+
+string_separate() {
+    input="$1"
+    i=0
+    while [ "$i" -lt "${#input}" ]; do
+        i=$((i + 1))
+        if [ "$i" -gt 1 ]; then
+            printf ', '
+        fi
+        ch=$(echo "$input" | cut -c "$i")
+        printf '%s' "$ch"
+    done
+    echo
+}
+
+main "$@"
 

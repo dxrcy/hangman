@@ -37,7 +37,7 @@ rs:
 
 # Shell (bash)
 sh:
-	sh src/hangman.sh
+	sh src/hangman.sh {{words}}
 
 # Typescript
 ts:

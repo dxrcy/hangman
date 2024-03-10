@@ -5,7 +5,7 @@ Simple CLI hangman examples in a few programming languages.
 ## Languages
 
 - Go
-- Java
+- ⭐ Java
 - Javascript
 - Lua
 - Powershell

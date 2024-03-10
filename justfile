@@ -1,13 +1,15 @@
 @default:
 	@just --list
 
+words := "words/lf.txt"
+
 # Go
 go:
 	go run src/go/hangman.go
 
 # Java
 java:
-	java src/java/hangman.java
+	java src/java/hangman.java -- {{words}} 
 
 # Javascript
 js:
@@ -31,7 +33,7 @@ rb:
 
 # Rust
 rs:
-	rustc src/rust/hangman.rs -o dist/hangman && dist/hangman words/lf.txt
+	rustc src/rust/hangman.rs -o dist/hangman && dist/hangman {{words}}
 
 # Shell (bash)
 sh:
@@ -43,5 +45,5 @@ ts:
 
 # Zig
 zig:
-	zig run src/zig/hangman.zig -- words/lf.txt
+	zig run src/zig/hangman.zig -- {{words}} 
 

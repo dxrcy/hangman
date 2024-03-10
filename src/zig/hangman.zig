@@ -1,10 +1,10 @@
 const std = @import("std");
-const print = std.debug.print;
 const io = std.io;
 const fs = std.fs;
+const debug = std.debug;
+const process = std.process;
 const ArrayList = std.ArrayList;
 const stdin = std.io.getStdIn().reader();
-const process = std.process;
 
 pub fn main() !void {
     print("=== HANGMAN ===\n", .{});
@@ -17,7 +17,7 @@ pub fn main() !void {
     _ = args.next();
 
     const filename = args.next() orelse {
-        print("Please provide a file path.\n", .{});
+        debug.print("Please provide a file path.\n", .{});
         process.exit(1);
     };
 
@@ -29,15 +29,9 @@ pub fn main() !void {
         words.deinit();
     }
 
-    const file = fs.cwd().openFile(filename, .{}) catch {
-        print("Failed to read file.\n", .{});
+    readFileLines(filename, &words, allocator) catch {
+        debug.print("Failed to read file.\n", .{});
         process.exit(2);
-    };
-    defer file.close();
-
-    readFileLines(file, &words, allocator) catch {
-        print("Failed to read file.\n", .{});
-        process.exit(3);
     };
 
     var seed: u64 = undefined;
@@ -113,7 +107,15 @@ fn HashSet(comptime K: type) type {
     return std.AutoHashMap(K, bool);
 }
 
-fn readFileLines(file: fs.File, list: *ArrayList(ArrayList(u8)), allocator: anytype) !void {
+pub fn print(comptime fmt: []const u8, args: anytype) void {
+    const stdout = io.getStdOut().writer();
+    nosuspend stdout.print(fmt, args) catch return;
+}
+
+fn readFileLines(filename: [:0]const u8, list: *ArrayList(ArrayList(u8)), allocator: anytype) !void {
+    const file = try fs.cwd().openFile(filename, .{});
+    defer file.close();
+
     var buf_reader = io.bufferedReader(file.reader());
     const reader = buf_reader.reader();
 
@@ -173,4 +175,3 @@ fn readFirstByte() !?u8 {
     }
     return first;
 }
-

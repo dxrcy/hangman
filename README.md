@@ -25,6 +25,25 @@ Simple CLI hangman examples in a few programming languages.
 - Common Lisp
 - Kotlin
 
+## How to use
+
+Install [just](https://crates.io/crates/just) to run the examples.
+
+```sh
+just --list
+
+just rs
+just zig
+```
+
+Or run manually:
+
+```sh
+go run src/hangman.go words/lf.txt
+```
+
+There are 2 words files: `words/lf.txt` and `words/crlf.txt`, for LF and CRLF formats.
+
 ## Concepts implemented
 
 // todo

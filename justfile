@@ -28,8 +28,8 @@ py:
 	python src/hangman.py {{words}}
 
 # Ruby
-# rb:
-# 	ruby src/hangman.rb
+rb:
+	ruby src/hangman.rb {{words}}
 
 # Rust
 rs:

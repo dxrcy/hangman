@@ -13,16 +13,13 @@ Simple CLI hangman examples in a few programming languages.
 - 🖥️ [Shell (bash)](./src/hangman.sh)
 - 🟦 [Typescript](./src/hangman.ts)
 - 🦎 [Zig](./src/hangman.zig)
+- 💎 [Ruby](./src/hangman.rb)
 
 - *([Pseudocode](./src/hangman.pseudo))*
 
-### (Need updating)
+### (Not implemented yet)
 
-- Powershell
-- Ruby
-
-### (Not implemented)
-
+- Powershell (needs updating)
 - C
 - Haskell
 

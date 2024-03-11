@@ -1,35 +1,79 @@
 import random
+import sys
 
-print ("=== Hangman ===")
-words = open("words.txt", "r").read().split("\n")
 
-while True:
-  word = words[random.randint(0, (len(words) - 1))]
-  correct = ""
-  incorrect = ""
+def main():
+    print("=== HANGMAN ===")
 
-  while True:
-    show = ""
-    for i in word:
-      if i in correct:
-        show += i
-      else:
-        show += "_"
-    
-    if show == word:
-      print ("\n========\n   WIN\n========")
-      break
-    
-    print (f"\n{show}\nChances: {str(6 - len(incorrect))}\nCorrect: {correct}\nIncorrect: {incorrect}")
-    guess = input("Guess: ")
+    if len(sys.argv) < 2:
+        print("Please provide a file path.", file=sys.stderr)
+        sys.exit(1)
+    filename = sys.argv[1]
 
-    if guess in word:
-      if guess not in correct:
-        correct += guess
-    else:
-      if guess not in incorrect:
-        incorrect += guess
+    try:
+        file = open(filename, "r").read()
+    except Exception:
+        print("Failed to read file.", file=sys.stderr)
+        sys.exit(2)
 
-    if len(incorrect) >= 6:
-      print(f"\n========\n  LOSS\n  The word was '{word}'\n========")
-      break
+    words = []
+    for line in file.split("\n"):
+        line = line.strip()
+        if len(line) > 0:
+            words.append(line)
+
+    print("\n\n\n\n\n")
+
+    while True:
+        index = random.randint(0, (len(words) - 1))
+        word = words[index]
+
+        correct = set()
+        incorrect = set()
+
+        while True:
+            for i in range(0, 5):
+                print("\033[A\033[K", end="")
+
+            visible = ""
+            is_win = True
+            for ch in word:
+                if ch in correct:
+                    visible += ch
+                else:
+                    visible += "_"
+                    is_win = False
+
+            if is_win:
+                print("---------")
+                print("You win! :)")
+                print(f"The word was: '{word}'")
+                print("---------")
+                input()
+                break
+            if len(incorrect) >= 6:
+                print("---------")
+                print("You lose! :(")
+                print(f"The word was: '{word}'")
+                print("---------")
+                input()
+                break
+
+            print(visible)
+            print("Chances:", 6 - len(incorrect))
+            print("Correct:", ", ".join(correct))
+            print("Incorrect:", ", ".join(incorrect))
+
+            line = input("Guess: ")
+            if len(line) < 1:
+                continue
+            guess = line[0]
+
+            if guess in word:
+                correct.add(guess)
+            else:
+                incorrect.add(guess)
+
+
+if __name__ == "__main__":
+    main()

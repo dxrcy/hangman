@@ -25,7 +25,7 @@ pwsh:
 
 # Python
 py:
-	python src/hangman.py
+	python src/hangman.py {{words}}
 
 # Ruby
 rb:

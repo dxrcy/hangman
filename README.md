@@ -21,6 +21,11 @@ Simple CLI hangman examples in a few programming languages.
 - Powershell
 - Ruby
 
+### (Not implemented)
+
+- C
+- Haskell
+
 ## Concepts implemented
 
 // todo

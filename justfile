@@ -20,16 +20,16 @@ lua:
 	lua src/hangman.lua {{words}}
 
 # Powershell
-pwsh:
-	pwsh src/hangman.ps1
+# pwsh:
+# 	pwsh src/hangman.ps1
 
 # Python
 py:
 	python src/hangman.py {{words}}
 
 # Ruby
-rb:
-	ruby src/hangman.rb
+# rb:
+# 	ruby src/hangman.rb
 
 # Rust
 rs:

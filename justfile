@@ -3,13 +3,15 @@
 
 words := "words/lf.txt"
 
+outfile := "./hangman"
+
 # Go
 go:
 	go run src/hangman.go {{words}}
 
 # Haskell
 hs:
-	ghc -Wall -dynamic src/hangman.hs -o dist/hangman && dist/hangman {{words}}
+	ghc -Wall -dynamic src/hangman.hs -o {{outfile}} && {{outfile}} {{words}}
 
 # Java
 java:
@@ -23,10 +25,6 @@ js:
 lua:
 	lua src/hangman.lua {{words}}
 
-# Powershell
-# pwsh:
-# 	pwsh src/hangman.ps1
-
 # Python
 py:
 	python src/hangman.py {{words}}
@@ -37,7 +35,7 @@ rb:
 
 # Rust
 rs:
-	rustc src/hangman.rs -o dist/hangman && dist/hangman {{words}}
+	rustc src/hangman.rs -o {{outfile}} && {{outfile}} {{words}}
 
 # Shell (bash)
 sh:

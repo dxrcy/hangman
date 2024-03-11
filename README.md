@@ -14,6 +14,7 @@ Simple CLI hangman examples in a few programming languages.
 - 🟦 [Typescript](./src/hangman.ts)
 - 🦎 [Zig](./src/hangman.zig)
 - 💎 [Ruby](./src/hangman.rb)
+- 🇭 [Haskell](./src/hangman.hs)
 
 - *([Pseudocode](./src/hangman.pseudo))*
 
@@ -21,7 +22,6 @@ Simple CLI hangman examples in a few programming languages.
 
 - Powershell (needs updating)
 - C
-- Haskell
 
 ## Concepts implemented
 

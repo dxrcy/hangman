@@ -7,6 +7,10 @@ words := "words/lf.txt"
 go:
 	go run src/hangman.go {{words}}
 
+# Haskell
+hs:
+	ghc -Wall -dynamic src/hangman.hs -o dist/hangman && dist/hangman {{words}}
+
 # Java
 java:
 	java src/hangman.java {{words}} 

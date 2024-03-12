@@ -8,25 +8,29 @@ import System.Random
 main :: IO ()
 main = do
     putStrLn "=== HANGMAN ==="
-    
+    filename <- tryGetFilenameArg
+    allWords <- tryReadFileLines filename
+    putStrLn "\n\n\n\n\n"
+    infiniteLoop allWords
+
+tryGetFilenameArg :: IO String
+tryGetFilenameArg = do
     args <- getArgs
     if length args < 1 then do
         hPutStrLn stderr "Please provide a file path."
         exitWith $ ExitFailure 1
     else do
-        let filename = head args
+        return $ head args
 
-        result <- try $ readFile filename :: IO (Either SomeException String)
-        case result of
-            Left _ -> do
-                hPutStrLn stderr "Failed to read file."
-                exitWith $ ExitFailure 2
-            Right contents -> do
-                let allWords = lines contents
-
-                putStrLn "\n\n\n\n\n"
-                _ <- infiniteLoop allWords
-                return ()
+tryReadFileLines :: String -> IO [String]
+tryReadFileLines filename = do
+    result <- try $ readFile filename :: IO (Either SomeException String)
+    case result of
+        Left _ -> do
+            hPutStrLn stderr "Failed to read file."
+            exitWith $ ExitFailure 2
+        Right file -> do
+            return $ lines file
 
 infiniteLoop :: [String] -> IO ()
 infiniteLoop allWords = do
@@ -35,7 +39,7 @@ infiniteLoop allWords = do
     let correct = Set.empty
     let incorrect = Set.empty
 
-    _ <- gameLoop word correct incorrect
+    gameLoop word correct incorrect
     infiniteLoop allWords
 
 gameLoop :: String -> CharSet -> CharSet -> IO ()
@@ -46,19 +50,9 @@ gameLoop word correct incorrect = do
     let isWin = not $ any (== '_') visible
 
     if isWin then do
-        putStrLn "---------"
-        putStrLn "You win! :)"
-        putStrLn $ "The word was: '" ++ word ++ "'"
-        putStrLn "---------"
-        _ <- getLine
-        return ()
+        endScreen word "You win! :)"
     else if length incorrect >= 6 then do
-        putStrLn "---------"
-        putStrLn "You lose! :("
-        putStrLn $ "The word was: '" ++ word ++ "'"
-        putStrLn "---------"
-        _ <- getLine
-        return ()
+        endScreen word "You lose! :("
     else do
         putStrLn visible
         putStrLn $ "Chances: " ++ (show $ 6 - length incorrect)
@@ -78,6 +72,15 @@ gameLoop word correct incorrect = do
             gameLoop word (Set.insert guess correct) incorrect
         else
             gameLoop word correct (Set.insert guess incorrect)
+
+endScreen :: String -> String -> IO ()
+endScreen word msg = do
+    putStrLn "---------"
+    putStrLn msg
+    putStrLn $ "The word was: '" ++ word ++ "'"
+    putStrLn "---------"
+    _ <- getLine
+    return ()
 
 type CharSet = Set.Set Char
 

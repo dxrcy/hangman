@@ -1,9 +1,9 @@
 import Control.Exception (try, SomeException)
-import qualified Data.Set as Set
 import System.Environment
 import System.Exit
 import System.IO
 import System.Random
+import qualified Data.Set as Set
 
 main :: IO ()
 main = do
@@ -56,18 +56,16 @@ gameLoop word correct incorrect = do
     else do
         putStrLn visible
         putStrLn $ "Chances: " ++ (show $ 6 - length incorrect)
-        putStrLn $ "Correct: " ++ (joinArray $ Set.toList correct)
-        putStrLn $ "Incorrect: " ++ (joinArray $ Set.toList incorrect)
+        putStrLn $ "Correct: " ++ (joinSet correct)
+        putStrLn $ "Incorrect: " ++ (joinSet incorrect)
         putStr "Guess: "
         hFlush stdout
 
         line <- getLine
         let guess = head line
 
-        if length line < 1 then do
+        if length line < 1 then
             gameLoop word correct incorrect
-        else if guess == '\n' then do
-            return ()
         else if elem guess word then
             gameLoop word (Set.insert guess correct) incorrect
         else
@@ -85,7 +83,14 @@ endScreen word msg = do
 type CharSet = Set.Set Char
 
 mapVisible :: CharSet -> String -> String
-mapVisible correct = map (\ch -> if Set.member ch correct then ch else '_')
+mapVisible correct = map (\ch ->
+    if Set.member ch correct
+        then ch
+        else '_'
+    )
+
+joinSet :: CharSet -> String
+joinSet = joinArray . Set.toList
 
 joinArray :: String -> String
 joinArray []     = []

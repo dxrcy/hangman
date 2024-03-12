@@ -25,6 +25,10 @@ js:
 lua:
 	lua src/hangman.lua {{words}}
 
+# Powershell
+pwsh:
+	pwsh src/hangman.ps1 {{words}}
+
 # Python
 py:
 	python src/hangman.py {{words}}

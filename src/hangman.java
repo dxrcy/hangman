@@ -1,16 +1,12 @@
 import java.util.Scanner;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
 import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashSet;
-
-import java.lang.Character;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class Hangman {
     public static void main(String[] args) {
@@ -118,4 +114,3 @@ public class Hangman {
         System.out.println();
     }
 }
-

@@ -5,6 +5,11 @@ words := "words/lf.txt"
 
 outfile := "./hangman"
 
+# C
+c:
+	echo '(unfinished)' &&\
+	gcc -Wall todo/hangman.c -o {{outfile}} && {{outfile}} {{words}}
+
 # Go
 go:
 	go run src/hangman.go {{words}}

@@ -7,8 +7,7 @@ outfile := "./hangman"
 
 # C
 c:
-	echo '(unfinished)' &&\
-	gcc -Wall todo/hangman.c -o {{outfile}} && {{outfile}} {{words}}
+	gcc -Wall src/hangman.c -o {{outfile}} && {{outfile}} {{words}}
 
 # Go
 go:

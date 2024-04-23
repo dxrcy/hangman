@@ -1,7 +1,4 @@
-use std::{
-    collections::HashSet,
-    env, fs,
-    io::{self, Write},
+use std::{ collections::HashSet, env, fs, io::{self, Write},
     time::{SystemTime, UNIX_EPOCH},
 };
 

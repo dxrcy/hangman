@@ -28,32 +28,23 @@ struct list list_new(int cap) {
 void list_push(struct list *list, char data[MAX_WORD_LEN]) {
     // Resize allocated array
     if (list->len >= list->cap) {
-        int prev_cap = list->cap;
-        list->cap = list->len + 10;
-
-        char *new_data = realloc(list->data, list->cap * MAX_WORD_LEN);
+        int cap = list->len + 10;
+        char *new_data = realloc(list->data, cap * MAX_WORD_LEN);
         if (new_data == NULL) {
             perror("realloc failed.\n");
             exit(EXIT_FAILURE);
         }
 
         // Zero out new memory
-        for (int i = prev_cap * MAX_WORD_LEN; i < list->cap * MAX_WORD_LEN;
-             i++) {
-            new_data[i] = 0;
+        for (int i = list->cap; i < cap; i++) {
+            new_data[i * MAX_WORD_LEN] = '\0';
         }
 
+        list->cap = cap;
         list->data = new_data;
     }
 
-    for (int i = 0; i < MAX_WORD_LEN; i++) {
-        // This is complicated!
-        ((char *)list->data)[list->len * MAX_WORD_LEN + i] = data[i];
-        if (data[i] == '\0') {
-            break;
-        }
-    }
-
+    strcpy(&list->data[list->len * MAX_WORD_LEN], data);
     list->len++;
 }
 

@@ -71,17 +71,6 @@ struct list read_file_lines(FILE *fd) {
     return lines;
 }
 
-void print_list(struct list *list) {
-    printf("len:%d cap:%d\n", list->len, list->cap);
-    for (int i = 0; i < list->len; i++) {
-        printf("%2d: <", i);
-        for (int j = 0; j < MAX_WORD_LEN; j++) {
-            printf("%c", list->data[i * MAX_WORD_LEN + j]);
-        }
-        printf(">\n");
-    }
-}
-
 void print_char_list(char *string) {
     char ch;
     for (int i = 0; (ch = string[i]) != '\0'; i++) {

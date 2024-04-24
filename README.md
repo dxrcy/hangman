@@ -48,3 +48,7 @@ There are 2 words files: `words/lf.txt` and `words/crlf.txt`, for LF and CRLF fo
 
 // todo
 
+## Todo
+
+- Check character input is a letter
+

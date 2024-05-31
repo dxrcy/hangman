@@ -98,5 +98,3 @@ function readInput(rl, prompt) {
     });
 }
 
-
-

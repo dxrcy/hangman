@@ -180,7 +180,4 @@ int main(int argc, char **argv) {
             }
         }
     }
-
-    // Never executed?
-    free(words.data);
 }

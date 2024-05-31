@@ -44,7 +44,7 @@ local function main()
                 print("You win! :)")
                 print("The word was: '" .. word .. "'")
                 print("---------")
-                io.read()
+                _ = io.read()
                 break
             end
             if #incorrect >= 6 then
@@ -52,7 +52,7 @@ local function main()
                 print("You lose! :(")
                 print("The word was: '" .. word .. "'")
                 print("---------")
-                io.read()
+                _ = io.read()
                 break
             end
 
@@ -110,3 +110,4 @@ function StringSeparate(input)
 end
 
 main()
+

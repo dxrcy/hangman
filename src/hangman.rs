@@ -1,4 +1,7 @@
-use std::{ collections::HashSet, env, fs, io::{self, Write},
+use std::{
+    collections::HashSet,
+    env, fs,
+    io::{self, Write},
     time::{SystemTime, UNIX_EPOCH},
 };
 
@@ -104,4 +107,3 @@ fn read_char() -> Option<char> {
         .next()
         .filter(|ch| *ch != '\r' && *ch != '\n')
 }
-

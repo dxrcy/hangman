@@ -98,4 +98,3 @@ function readInput(rl: readline.Interface, prompt: string): Promise<string> {
     });
 }
 
-

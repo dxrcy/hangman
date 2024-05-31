@@ -52,7 +52,7 @@ main() {
                 echo "You win! :)"
                 printf "The word was: '%s'\n" "$word"
                 echo "---------"
-                read -r
+                read -r _
                 break
             fi
             if [ "${#incorrect}" -ge 6 ]; then
@@ -60,7 +60,7 @@ main() {
                 echo "You lose! :("
                 printf "The word was: '%s'\n" "$word"
                 echo "---------"
-                read -r
+                read -r _
                 break
             fi
             

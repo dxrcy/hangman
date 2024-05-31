@@ -9,10 +9,16 @@ main() {
         exit 1
     fi
 
+    words="$(cat "$filename" 2>/dev/null)"
+    if [ -z "$words" ]; then
+        echo "Failed to read file." >&2
+        exit 2
+    fi
+
     printf '\n\n\n\n\n\n'
 
     while true; do
-        word="$(shuf -n1 "$filename" | tr -d '\r' | tr -d '\n')"
+        word="$(echo "$words" | shuf -n1 | tr -d '\r' | tr -d '\n')"
         correct=''
         incorrect=''
 

@@ -1,6 +1,6 @@
-print("=== HANGMAN ===")
-
 local function main()
+    print("=== HANGMAN ===")
+
     if #arg < 1 then
         print("Please provide a file path.")
         os.exit(1)

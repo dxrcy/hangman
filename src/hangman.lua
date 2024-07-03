@@ -24,7 +24,7 @@ local function main()
 
         while true do
             for _ = 1, 5 do
-                io.write("\033[A\033[K");
+                io.write("\033[A\033[K")
             end
 
             local visible = ""

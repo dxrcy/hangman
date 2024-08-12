@@ -5,6 +5,7 @@ Simple CLI hangman examples in a few programming languages.
 ## Languages
 
 - 🖥️ [C](./src/hangman.c)
+- 💽 [C++](./src/hangman.cpp)
 - 🐹 [Go](./src/hangman.go)
 - ☕ [Java](./src/hangman.java)
 - 🟨 [Javascript](./src/hangman.js)

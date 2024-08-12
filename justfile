@@ -2,7 +2,6 @@
 	@just --list
 
 words := "words/lf.txt"
-
 outfile := "./hangman"
 
 # C

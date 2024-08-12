@@ -9,6 +9,10 @@ outfile := "./hangman"
 c:
 	gcc -Wall src/hangman.c -o {{outfile}} && {{outfile}} {{words}}
 
+# C++
+cpp:
+	g++ -Wall src/hangman.cpp -o {{outfile}} && {{outfile}} {{words}}
+
 # Go
 go:
 	go run src/hangman.go {{words}}

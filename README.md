@@ -18,23 +18,17 @@ Simple CLI hangman examples in a few programming languages.
 - 🦎 [Zig](./src/hangman.zig)
 - 💎 [Ruby](./src/hangman.rb)
 - 🇭 [Haskell](./src/hangman.hs)
-
 - *([Pseudocode](./src/hangman.pseudo))*
 
-### (Not implemented yet)
-
-- Common Lisp
-- Kotlin
+<!-- - Common Lisp -->
+<!-- - Kotlin -->
 
 ## How to use
 
-Install [just](https://crates.io/crates/just) to run the examples.
-
 ```sh
-just --list
-
-just rs
-just zig
+make c
+make rs
+make zig
 ```
 
 Or run manually:
@@ -45,11 +39,12 @@ go run src/hangman.go words/lf.txt
 
 There are 2 words files: `words/lf.txt` and `words/crlf.txt`, for LF and CRLF formats.
 
-## Concepts implemented
+<!-- ## Concepts implemented -->
+<!--  -->
+<!-- // todo -->
+<!--  -->
+<!-- ## Todo -->
+<!--  -->
+<!-- - Check character input is a letter -->
 
-// todo
-
-## Todo
-
-- Check character input is a letter
 

@@ -1,6 +1,6 @@
 # Hangman Examples
 
-Simple CLI hangman examples in a few programming languages.
+A collection of command-line hangman examples in a few programming languages.
 
 ## Languages
 

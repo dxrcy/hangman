@@ -41,6 +41,10 @@ py:
 rb:
 	ruby src/hangman.rb $(words)
 
+# Roc
+roc:
+	roc todo/hangman.roc $(words)
+
 # Rust
 rs:
 	rustc src/hangman.rs -o $(outfile) && $(outfile) $(words)

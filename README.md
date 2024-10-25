@@ -20,6 +20,8 @@ A collection of command-line hangman examples in a few programming languages.
 - 🇭 [Haskell](./src/hangman.hs)
 - *([Pseudocode](./src/hangman.pseudo))*
 
+<!-- - 🐦 [Roc](./src/roc.rs) -->
+
 <!-- - Common Lisp -->
 <!-- - Kotlin -->
 

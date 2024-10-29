@@ -23,7 +23,7 @@ func main() {
 	file, err := os.ReadFile(filename)
 	if err != nil {
 		stderr.Println("Failed to read file.")
-		os.Exit(1)
+		os.Exit(2)
 	}
 	words := strings.Split(string(file), "\n")
 

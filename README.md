@@ -24,6 +24,8 @@ A collection of command-line hangman examples in a few programming languages.
 
 <!-- - Common Lisp -->
 <!-- - Kotlin -->
+<!-- - Gleam -->
+<!-- - Elixir -->
 
 ## How to use
 
